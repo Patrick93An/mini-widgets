@@ -1,0 +1,12 @@
+$color: #0f0;
+$bg-color: #000;
+$title: 'tilte-h1';
+
+.#{$title} {
+
+	background-color: $bg-color;
+
+	h1 {
+		color: $color;
+	}
+}

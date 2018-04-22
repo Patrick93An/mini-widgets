@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { WidgetsWrapper } from "./components/widgets/Widgets-wrapper";
+import { WidgetsWrapper } from "./components/widgets/widgets-wrapper";
 
 class App extends React.Component {
 	render() {

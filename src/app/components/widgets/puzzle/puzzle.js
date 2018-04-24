@@ -2,6 +2,7 @@ import React from "react";
 import './style.scss';
 import { PuzzleState } from "./grid";
 import { connect } from "react-redux"
+import action_types from "./action-type";
 
 class Puzzle extends React.Component {
 	constructor() {
@@ -10,7 +11,7 @@ class Puzzle extends React.Component {
 
 	render() {
 		return(
-			<div className="puzzle-wrapper">
+			<div className="puzzle-wrapper" tabIndex="0" onKeyPress={this.props.changeArrByKeyPress}>
 				<div className="grid-input">
 					<input 
 						type="number" 
@@ -24,10 +25,10 @@ class Puzzle extends React.Component {
 					<PuzzleState num_arr={this.props.grid.grid_arr_numbers}/>
 				</ul>
 				<div className="control">
-					<button onClick={this.props.changeArr} data-name="LEFT">LEFT</button>
-					<button onClick={this.props.changeArr} data-name="RIGHT">RIGHT</button>
-					<button onClick={this.props.changeArr} data-name="UP">UP</button>
-					<button onClick={this.props.changeArr} data-name="DOWN">DOWN</button>
+					<button onClick={this.props.changeArr} data-name={action_types.dir.LEFT}>LEFT</button>
+					<button onClick={this.props.changeArr} data-name={action_types.dir.RIGHT}>RIGHT</button>
+					<button onClick={this.props.changeArr} data-name={action_types.dir.UP}>UP</button>
+					<button onClick={this.props.changeArr} data-name={action_types.dir.DOWN}>DOWN</button>
 				</div>
 			</div>
 		);
@@ -47,19 +48,55 @@ const mapDispatchToProps = (dispatch) => {
 			updated_number = Number.isNaN(updated_number) ? 2 : updated_number;
 			updated_number = updated_number >= 30 ? 30 : updated_number;
 			dispatch({
-				type: "CHANGE_GRID_NUMBER",
+				type: action_types.CHANGE_GRID_NUMBER,
 				grid_size: updated_number
 			})
 		},
+
 		changeArr: e => {
 			dispatch({
 				type: e.currentTarget.getAttribute('data-name'),
 			})
 		},
 
+		changeArrByKeyPress: e => {
+			switch (e.key) {
+				case 'a':
+				case 'j':
+					dispatch({
+						type: action_types.dir.LEFT
+					})
+					break;
+				case 'w':
+				case 'i':
+					dispatch({
+						type: action_types.dir.UP
+					})
+					break;
+				case 'd':
+				case 'l':
+					dispatch({
+						type: action_types.dir.RIGHT
+					})
+					break;
+				case 's':
+				case 'k':
+					dispatch({
+						type: action_types.dir.DOWN
+					})
+					break;
+
+			}
+		},
+
 		shuffleArr: e => {
 			let size_n = e.currentTarget.getAttribute('data-size');
-			let dir = ['LEFT', 'RIGHT', 'UP', 'DOWN'];
+			let dir = [
+				action_types.dir.LEFT,
+				action_types.dir.RIGHT,
+				action_types.dir.UP,
+				action_types.dir.DOWN
+			];
 			let ran_dir;
 			let ran_time;
 			for (let i = 0; i < 2000; i++) {

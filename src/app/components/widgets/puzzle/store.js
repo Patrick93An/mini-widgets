@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from "redux";
-
+import action_types from "./action-type";
 const gridReducer = (state = {
 	empty_index: 15,
 	grid_size: 4,
@@ -11,7 +11,7 @@ const gridReducer = (state = {
 		let next_empty_index;
 		let arr;
 	switch (action.type) {
-		case "CHANGE_GRID_NUMBER":
+		case action_types.CHANGE_GRID_NUMBER:
 			size = action.grid_size ** 2;
 			state = {
 				...state,
@@ -20,7 +20,7 @@ const gridReducer = (state = {
 				grid_arr_numbers: [...Array(size)].map((x, i) => (i + 1) % size)
 			};
 			break;
-		case "LEFT":
+		case action_types.dir.LEFT:
 			size_n = state.grid_size;
 			empty_index = state.empty_index;
 			if (empty_index % size_n == 0) {
@@ -36,7 +36,7 @@ const gridReducer = (state = {
 				}
 				break;
 			}
-		case "RIGHT":
+		case action_types.dir.RIGHT:
 			size_n = state.grid_size;
 			empty_index = state.empty_index;
 			if (empty_index % size_n == size_n - 1) {
@@ -52,7 +52,7 @@ const gridReducer = (state = {
 				}
 				break;
 			}
-		case "UP":
+		case action_types.dir.UP:
 			size_n = state.grid_size;
 			size = state.grid_size ** 2;
 			empty_index = state.empty_index;
@@ -69,7 +69,7 @@ const gridReducer = (state = {
 				}
 				break;
 			}
-		case "DOWN":
+		case action_types.dir.DOWN:
 			size_n = state.grid_size;
 			size = state.grid_size ** 2;
 			empty_index = state.empty_index;

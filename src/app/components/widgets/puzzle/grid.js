@@ -5,7 +5,9 @@ export class PuzzleState extends React.Component {
 		super(props);
 
 		this.createOrUpdateGrid = num_arr => {
-			return num_arr.map((x, i) => <li key={i}>{x}</li>);
+			return num_arr.map((x, i) => x == 0 ? 
+				<li className='empty' key={i}>{x}</li> :
+				<li key={i}>{x}</li>);
 		}
 	}
 

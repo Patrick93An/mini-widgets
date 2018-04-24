@@ -36,22 +36,56 @@ const gridReducer = (state = {
 				}
 				break;
 			}
-		// case "RIGHT":
-		// 	size_n = state.grid_size;
-		// 	empty_index = state.empty_index;
-		// 	if (empty_index % size_n == size_n - 1) {
-		// 		break;
-		// 	} else {
-		// 		next_empty_index = empty_index + 1;
-		// 		arr = state.grid_arr_numbers;
-		// 		[arr[next_empty_index], arr[empty_index]] = [arr[empty_index], arr[next_empty_index]];
-		// 		state = {
-		// 			...state,
-		// 			empty_index: next_empty_index,
-		// 			grid_arr_numbers: arr
-		// 		}
-		// 		break;
-		// 	}
+		case "RIGHT":
+			size_n = state.grid_size;
+			empty_index = state.empty_index;
+			if (empty_index % size_n == size_n - 1) {
+				break;
+			} else {
+				next_empty_index = empty_index + 1;
+				arr = state.grid_arr_numbers;
+				[arr[next_empty_index], arr[empty_index]] = [arr[empty_index], arr[next_empty_index]];
+				state = {
+					...state,
+					empty_index: next_empty_index,
+					grid_arr_numbers: arr
+				}
+				break;
+			}
+		case "UP":
+			size_n = state.grid_size;
+			size = state.grid_size ** 2;
+			empty_index = state.empty_index;
+			if (empty_index > size - size_n - 1 ) {
+				break;
+			} else {
+				next_empty_index = empty_index + size_n;
+				arr = state.grid_arr_numbers;
+				[arr[next_empty_index], arr[empty_index]] = [arr[empty_index], arr[next_empty_index]];
+				state = {
+					...state,
+					empty_index: next_empty_index,
+					grid_arr_numbers: arr
+				}
+				break;
+			}
+		case "DOWN":
+			size_n = state.grid_size;
+			size = state.grid_size ** 2;
+			empty_index = state.empty_index;
+			if (empty_index < size_n) {
+				break;
+			} else {
+				next_empty_index = empty_index - size_n;
+				arr = state.grid_arr_numbers;
+				[arr[next_empty_index], arr[empty_index]] = [arr[empty_index], arr[next_empty_index]];
+				state = {
+					...state,
+					empty_index: next_empty_index,
+					grid_arr_numbers: arr
+				}
+				break;
+			}
 	}
 	return state
 };

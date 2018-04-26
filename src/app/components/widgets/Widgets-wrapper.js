@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import Puzzle from "./puzzle/main"
+import Puzzle from "./puzzle/js/main"
 
 export class WidgetsWrapper extends React.Component {
 	render() {

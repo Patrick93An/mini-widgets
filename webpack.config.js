@@ -28,7 +28,7 @@ var config = {
             loader: "sass-loader"
           }
         ]
-      }
+      }, 
     ]
   },
   plugins: [

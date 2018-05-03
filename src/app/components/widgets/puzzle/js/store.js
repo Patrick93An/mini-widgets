@@ -1,10 +1,38 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import action_types from "./action-type";
+import { createEpicMiddleware, combineEpics } from 'redux-observable';
+import { debounceTime } from 'rxjs'
+import { Observable } from 'rxjs/Observable';
 
+// const changeGridEpic = action$ =>
+// 	action$.ofType(action_types.CHANGE_GRID_NUMBER)
+// 		.switchMap(action$ => new Observable(action$ => {
+// 			console.log(action$);
+// 			return action$.debounceTime(1000)}))
+		
 
+// const changeGridEpic = action$ =>
+// 	action$.ofType(action_types.CHANGE_GRID_NUMBER)
+// 		.debounceTime(1000)
+
+// action$.filter(action => action.type === 'PING')
+//     .delay(1000) // Asynchronously wait 1000ms then continue
+//     .mapTo({ type: 'PONG' });		
+
+const changeGridEpic = action$ =>
+	action$.ofType(action_types.CHANGE_GRID_INPUT_NUMBER)
+	    .debounceTime(1000) // Asynchronously wait 1000ms then continue
+	    .map(action => ({
+	    	...action,
+	    	type: action_types.CHANGE_GRID_NUMBER
+	    }));
+		
+
+const changeGridEpicMiddleware = createEpicMiddleware(changeGridEpic);
 
 const gridReducer = (state = {
 	empty_index: 15,
+	grid_size_input: 4,
 	grid_size: 4,
 	grid_arr_numbers: [...Array(16)].map((x, i) => (i + 1) % 16 ),
 	some_prev_state: {
@@ -17,12 +45,18 @@ const gridReducer = (state = {
 		let next_empty_index;
 		let arr;
 	switch (action.type) {
+		case action_types.CHANGE_GRID_INPUT_NUMBER:
+			state = {
+				...state,
+				grid_size_input: action.grid_size,
+			};
+			break;
 		case action_types.CHANGE_GRID_NUMBER:
 			size = action.grid_size ** 2;
 			state = {
 				...state,
-				empty_index: size - 1,
 				grid_size: action.grid_size,
+				empty_index: size - 1,
 				grid_arr_numbers: [...Array(size)].map((x, i) => (i + 1) % size),
 				some_prev_state: {
 					...state.some_prev_state,
@@ -96,15 +130,15 @@ const gridReducer = (state = {
 				}
 				break;
 			}
+		default:
+			return state;
 	}
 	return state
 };
 
-
 export const store = createStore(
-	gridReducer
+	gridReducer,
+	applyMiddleware(changeGridEpicMiddleware)
 );
 
-store.subscribe(() => {
-	console.log('Store updated', store.getState());
-})
+

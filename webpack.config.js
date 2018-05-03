@@ -28,7 +28,22 @@ var config = {
             loader: "sass-loader"
           }
         ]
-      }, 
+      }, {
+        test: /\.(ttf|otf|jpg)$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192,
+              fallback: "file-loader",
+              // Below are the fallback options
+              name: "[path][hash].[ext]",
+              publicPath: "/static",
+              outputPath: "../static"
+            }
+          }
+        ]
+      }
     ]
   },
   plugins: [

@@ -1,23 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import action_types from "./action-type";
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
 import { debounceTime } from 'rxjs'
-import { Observable } from 'rxjs/Observable';
-
-// const changeGridEpic = action$ =>
-// 	action$.ofType(action_types.CHANGE_GRID_NUMBER)
-// 		.switchMap(action$ => new Observable(action$ => {
-// 			console.log(action$);
-// 			return action$.debounceTime(1000)}))
-		
-
-// const changeGridEpic = action$ =>
-// 	action$.ofType(action_types.CHANGE_GRID_NUMBER)
-// 		.debounceTime(1000)
-
-// action$.filter(action => action.type === 'PING')
-//     .delay(1000) // Asynchronously wait 1000ms then continue
-//     .mapTo({ type: 'PONG' });		
+import { Observable } from 'rxjs/Observable';		
 
 const changeGridEpic = action$ =>
 	action$.ofType(action_types.CHANGE_GRID_INPUT_NUMBER)
@@ -29,6 +14,17 @@ const changeGridEpic = action$ =>
 		
 
 const changeGridEpicMiddleware = createEpicMiddleware(changeGridEpic);
+
+const enhancers = [];
+const middleware = [changeGridEpicMiddleware];
+
+if (process.env.NODE_ENV === 'development') {
+  const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
+
+  if (typeof devToolsExtension === 'function') {
+    enhancers.push(devToolsExtension());
+  }
+}
 
 const gridReducer = (state = {
 	empty_index: 15,
@@ -64,7 +60,7 @@ const gridReducer = (state = {
 				}
 			};
 			break;
-		case action_types.dir.RIGHT:
+		case action_types.dir.LEFT:
 			size_n = state.grid_size;
 			empty_index = state.empty_index;
 			if (empty_index % size_n == 0) {
@@ -80,7 +76,7 @@ const gridReducer = (state = {
 				}
 				break;
 			}
-		case action_types.dir.LEFT:
+		case action_types.dir.RIGHT:
 			size_n = state.grid_size;
 			empty_index = state.empty_index;
 			if (empty_index % size_n == size_n - 1) {
@@ -136,9 +132,11 @@ const gridReducer = (state = {
 	return state
 };
 
+const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
+
 export const store = createStore(
 	gridReducer,
-	applyMiddleware(changeGridEpicMiddleware)
+	composedEnhancers
 );
 
 

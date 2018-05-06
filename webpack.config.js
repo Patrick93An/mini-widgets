@@ -46,6 +46,11 @@ var config = {
       }
     ]
   },
+
+  devServer: {
+    historyApiFallback: true,
+  },
+    
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/index.html",

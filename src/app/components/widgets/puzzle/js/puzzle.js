@@ -3,7 +3,7 @@ import styles from '../scss/style.scss';
 import { PuzzleState } from "./grid";
 import { connect } from "react-redux"
 import action_types from "./action-type";
-import helper from "../../../helper";
+import { setCssProperty } from "../../../helper";
 
 
 class Puzzle extends React.Component {
@@ -11,9 +11,9 @@ class Puzzle extends React.Component {
 		super();
 		this.state = {}
 		this.puzzle_grid_wrapper = React.createRef();
-		this.setGridWidth = helper.setCssProperty('--grid-width')('%');
-		this.setGridHeight = helper.setCssProperty('--grid-height')('%');
-		this.setGridFontSize = helper.setCssProperty('--grid-font-size')('px');
+		this.setGridWidth = setCssProperty('--grid-width')('%');
+		this.setGridHeight = setCssProperty('--grid-height')('%');
+		this.setGridFontSize = setCssProperty('--grid-font-size')('px');
 	}
 
 	componentDidUpdate() {

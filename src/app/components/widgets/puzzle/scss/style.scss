@@ -1,6 +1,12 @@
 $color: #0f0;
 $bg-color: #000;
 
+:root {
+	--widgets-puzzle-grid-width: 25%;
+	--widgets-puzzle-grid-height: 25%;
+	--widgets-puzzle-grid-font-size: 50px;
+}
+
 @font-face {
 	font-family: 'Bittypix_Countdown';
 	src: url('../static/fonts/Bittypix_Countdown/Bittypix_Countdown.otf');
@@ -31,12 +37,9 @@ html, body {
 	}
 
 	.puzzle-grid {
-		--grid-width: 25%;
-		--grid-height: 25%;
-		--grid-font-size: 50px;
-		$grid-width:  var(--grid-width);
-		$grid-height:  var(--grid-height);
-		$grid-font-size:  var(--grid-font-size);
+		$grid-width:  var(--widgets-puzzle-grid-width);
+		$grid-height:  var(--widgets-puzzle-grid-height);
+		$grid-font-size:  var(--widgets-puzzle-grid-font-size);
 		font-size: 0;
 		padding: 0;
 		width: 600px;

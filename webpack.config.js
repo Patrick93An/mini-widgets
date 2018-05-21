@@ -50,6 +50,10 @@ var config = {
   devServer: {
     historyApiFallback: true,
   },
+
+  output: {
+    publicPath: '/app'
+  },
     
   plugins: [
     new HtmlWebPackPlugin({

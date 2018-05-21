@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-const gridReducer = (state = {
+const initState = {
 	empty_index: 15,
 	grid_size_input: 4,
 	grid_size: 4,
@@ -34,7 +34,9 @@ const gridReducer = (state = {
 	some_prev_state: {
 		grid_size: 4,
 	}
-}, action) => {
+};
+
+const gridReducer = (state, action) => {
 		let size;
 		let empty_index;
 		let size_n;
@@ -60,7 +62,7 @@ const gridReducer = (state = {
 				}
 			};
 			break;
-		case action_types.dir.LEFT:
+		case action_types.dir.RIGHT:
 			size_n = state.grid_size;
 			empty_index = state.empty_index;
 			if (empty_index % size_n == 0) {
@@ -76,7 +78,7 @@ const gridReducer = (state = {
 				}
 				break;
 			}
-		case action_types.dir.RIGHT:
+		case action_types.dir.LEFT:
 			size_n = state.grid_size;
 			empty_index = state.empty_index;
 			if (empty_index % size_n == size_n - 1) {
@@ -136,6 +138,7 @@ const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 
 export const store = createStore(
 	gridReducer,
+	initState,
 	composedEnhancers
 );
 

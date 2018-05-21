@@ -11,19 +11,18 @@ class Puzzle extends React.Component {
 		super();
 		this.state = {}
 		this.puzzle_grid_wrapper = React.createRef();
-		this.setGridWidth = setCssProperty('--grid-width')('%');
-		this.setGridHeight = setCssProperty('--grid-height')('%');
-		this.setGridFontSize = setCssProperty('--grid-font-size')('px');
+		this.setGridWidth = setCssProperty('--widgets-puzzle-grid-width')('%')();
+		this.setGridHeight = setCssProperty('--widgets-puzzle-grid-height')('%')();
+		this.setGridFontSize = setCssProperty('--widgets-puzzle-grid-font-size')('px')();
 	}
 
 	componentDidUpdate() {
 		let prev_grid_size = this.props.grid.some_prev_state.grid_size;
 		let curr_grid_size = this.props.grid.grid_size;
-		let puzzle_grid_wrapper_ele = this.puzzle_grid_wrapper.current
-		if (prev_grid_size != curr_grid_size && puzzle_grid_wrapper_ele) {
-			this.setGridWidth(puzzle_grid_wrapper_ele)(100 / curr_grid_size);
-			this.setGridHeight(puzzle_grid_wrapper_ele)(100 / curr_grid_size);
-			this.setGridFontSize(puzzle_grid_wrapper_ele)(((15 - curr_grid_size) / 13 * 86) * 2 / curr_grid_size + 14);
+		if (prev_grid_size != curr_grid_size) {
+			this.setGridWidth(100 / curr_grid_size);
+			this.setGridHeight(100 / curr_grid_size);
+			this.setGridFontSize(((15 - curr_grid_size) / 13 * 86) * 2 / curr_grid_size + 14);
 		}
 	}
 
@@ -34,6 +33,13 @@ class Puzzle extends React.Component {
 					<PuzzleState num_arr={this.props.grid.grid_arr_numbers}/>
 				</ul>
 				<div className="configuration-section">
+					<div>
+						<h6>Control</h6>
+						<p>Use 
+							<strong>W, A, S, D</strong> or <strong>I, J, K, L</strong>
+							to move the puzzle.
+						</p>
+					</div>
 					<div className="grid-input">
 						<input 
 							type="number" 

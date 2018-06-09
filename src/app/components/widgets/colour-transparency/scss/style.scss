@@ -1,4 +1,30 @@
-.colour-layer {
-	width: 50px;
-	height: 50px;
+.layers-wrapper {
+	position: relative;
+	margin-left: 400px;
+
+	> li {
+		position: absolute;
+		top: 0;
+		transform-origin: center calc(100% - 25px)
+	}
+
+	@for $i from 0 through 6 {
+
+		> li:nth-child(#{$i + 1}) {
+			transform: rotate($i * 90deg);
+		}
+	}
+
+	.colour-layer-wrapper {
+		margin-top: 100px;
+
+		.colour-layer {
+			width: 50px;
+			height: 50px;
+			top: 0;
+			left: 500px;
+			margin: auto;
+		}
+	}
 }
+

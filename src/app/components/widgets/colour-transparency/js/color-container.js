@@ -31,7 +31,7 @@ class ColourContainer extends React.Component {
 				<span onClick={this.props.addLayer}>Add</span>
 				<span style={{color:this.props.layer_states.target_colour}}>{this.props.layer_states.target_colour}</span>
 
-				<p onClick={this.props.toggleFixTargetColour}>Fix: {this.props.layer_states.fix_target_colour}</p>
+				<p onClick={this.props.toggleFixTargetColour}>Fix: {this.props.layer_states.is_fix_target_colour + ''}</p>
 				<ul className='layers-wrapper'>
 					{this.updateColourLayer(this.props.layer_states.layers)}
 				</ul>

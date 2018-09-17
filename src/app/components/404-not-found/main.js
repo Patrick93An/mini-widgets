@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 
 
-export class NotFound404 extends React.Component {
+export default class NotFound404 extends React.Component {
 	constructor(props) {
 		super(props);
 	}

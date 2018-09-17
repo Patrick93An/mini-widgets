@@ -1,10 +1,10 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./store"
-import Puzzle from "./puzzle"
+import CurrencyConvertor from "./CurrencyConvertor"
 
 
-export default class PuzzleMain extends React.Component {
+export default class CurrencyConvertorMain extends React.Component {
 	constructor() {
 		super();
 	}
@@ -12,7 +12,7 @@ export default class PuzzleMain extends React.Component {
 	render() {
 		return(
 			<Provider store={store}>
-				<Puzzle/>
+				<CurrencyConvertor/>
 			</Provider>
 		);
 	}

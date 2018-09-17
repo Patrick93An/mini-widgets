@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
-import { WidgetsWrapper } from "../widgets/widgets-wrapper";
+import { WidgetsWrapper } from "../../widgets/widgets-wrapper";
 import { Route } from 'react-router-dom';
 
-export class Home extends React.Component {
+export default class Home extends React.Component {
 	constructor(props) {
 		super(props);
 	}

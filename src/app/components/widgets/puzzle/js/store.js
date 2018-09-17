@@ -19,11 +19,11 @@ const enhancers = [];
 const middleware = [changeGridEpicMiddleware];
 
 if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
+	const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
 
-  if (typeof devToolsExtension === 'function') {
-    enhancers.push(devToolsExtension());
-  }
+	if (typeof devToolsExtension === 'function') {
+		enhancers.push(devToolsExtension());
+	}
 }
 
 const initState = {
@@ -37,11 +37,11 @@ const initState = {
 };
 
 const gridReducer = (state, action) => {
-		let size;
-		let empty_index;
-		let size_n;
-		let next_empty_index;
-		let arr;
+	let size;
+	let empty_index;
+	let size_n;
+	let next_empty_index;
+	let arr;
 	switch (action.type) {
 		case action_types.CHANGE_GRID_INPUT_NUMBER:
 			state = {

@@ -28,20 +28,18 @@ const initState = {
 	to_currency: "MYR",
 	from_value: 0,
 	to_value: 0,
-	currency_rate: 0,
-	single_unit: 0,
-	ten_unit: 0,
-	hundred_unit: 0,
-	total_unit: 0,
+	currency_rate: 0.13,
 };
 
 var clearActiveClasses = elems => {
 	let value = 0;
 	Array.from(elems).map(elem => {
 		if (elem.classList.contains("active")) {
+			value = -parseFloat(elem.textContent);
 			return elem.classList.remove("active");
 		}
 	});
+	return value;
 }
 
 var getNumberPadValue = elem => {
@@ -49,9 +47,11 @@ var getNumberPadValue = elem => {
 	if (elem.tagName == "LI") {
 		if (elem.classList.contains("active")) {
 			elem.classList.remove("active");
+			from_value += -parseFloat(elem.textContent);
 		} else {
+			from_value += clearActiveClasses(elem.parentElement.children)
 			elem.classList.add("active");
-			from_value = parseFloat(elem.textContent);
+			from_value += parseFloat(elem.textContent);
 		}
 	}
 	return from_value;
@@ -59,6 +59,7 @@ var getNumberPadValue = elem => {
 
 const CCReducer = (state, action) => {
 	let from_value = 0;
+	let to_value = 0;
 	switch (action.type) {
 		case action_types.CHANGE_FROM_CURRENCY:
 			state = {
@@ -84,10 +85,12 @@ const CCReducer = (state, action) => {
 			}
 			return state;
 		case action_types.CLICK_NUMBER_PAD:
-
+			from_value = state.from_value += getNumberPadValue(action.event);
+			to_value = Math.round(from_value * state.currency_rate * 100) / 100;
 			state = {
 				...state,
-				from_value: getNumberPadValue(action.event)
+				from_value: from_value,
+				to_value: to_value
 			}
 			return state;
 		default:

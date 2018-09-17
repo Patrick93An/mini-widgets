@@ -2,3 +2,5 @@
 /dist
 .yarnclean
 .yarn-error.log
+.env
+/static

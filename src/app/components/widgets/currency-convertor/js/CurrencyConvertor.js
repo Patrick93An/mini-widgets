@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
 		changeFromCurrency: e => {
 			dispatch({
 				type: action_types.CHANGE_FROM_CURRENCY,
-				from_currency: parseInt(e.currentTarget.value)
+				from_currency: parseFloat(e.currentTarget.value)
 			})
 		},
 
@@ -55,14 +55,14 @@ const mapDispatchToProps = (dispatch) => {
 		changeToCurrency: e => {
 			dispatch({
 				type: action_types.CHANGE_TO_CURRENCY,
-				to_currency: parseInt(e.currentTarget.value)
+				to_currency: parseFloat(e.currentTarget.value)
 			})
 		},
 
 		changeCurrencyRate: e => {
 			dispatch({
 				type: action_types.CHANGE_CURRENCY_RATE,
-				currency_rate: parseInt(e.currentTarget.value)
+				currency_rate: parseFloat(e.currentTarget.value)
 			})
 		},
 

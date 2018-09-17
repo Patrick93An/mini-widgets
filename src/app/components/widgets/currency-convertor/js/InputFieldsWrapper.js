@@ -25,6 +25,7 @@ export default class InputFieldsWrapper extends React.Component {
 					<span>{this.props.from_value}</span>
 					<input
 						type="number"
+						step="0.1"
 						onChange={this.props.changeCurrencyRate}
 						value={this.props.currency_rate} />
 					<span>{this.props.to_value}</span>

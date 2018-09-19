@@ -1,6 +1,6 @@
 /node_modules
 /dist
-.yarnclean
-.yarn-error.log
-.env
 /static
+.yarnclean
+yarn-error.log
+.env

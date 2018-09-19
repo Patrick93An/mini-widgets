@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { WidgetsWrapper } from "../../widgets/widgets-wrapper";
+import { WidgetsWrapper } from "../../widgets/Widgets-wrapper";
 import { Route } from 'react-router-dom';
 
 export default class Home extends React.Component {

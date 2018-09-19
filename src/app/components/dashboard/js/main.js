@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./store"
-import Dashboard from "./Dashboard"
+import Dashboard from "./dashboard"
 
 
 export default class DashboardMain extends React.Component {

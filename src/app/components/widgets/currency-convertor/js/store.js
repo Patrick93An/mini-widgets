@@ -57,9 +57,12 @@ var getNumberPadValue = elem => {
 	return from_value;
 }
 
+var getToValue = (from_value, currency_rate) => {
+	return Math.round(from_value * currency_rate * 100) / 100;
+}
+
 const CCReducer = (state, action) => {
 	let from_value = 0;
-	let to_value = 0;
 	switch (action.type) {
 		case action_types.CHANGE_FROM_CURRENCY:
 			state = {
@@ -81,16 +84,16 @@ const CCReducer = (state, action) => {
 		case action_types.CHANGE_CURRENCY_RATE:
 			state = {
 				...state,
+				to_value: getToValue(state.from_value, action.currency_rate),
 				currency_rate: action.currency_rate,
 			}
 			return state;
 		case action_types.CLICK_NUMBER_PAD:
 			from_value = state.from_value += getNumberPadValue(action.event);
-			to_value = Math.round(from_value * state.currency_rate * 100) / 100;
 			state = {
 				...state,
 				from_value: from_value,
-				to_value: to_value
+				to_value: getToValue(from_value, state.currency_rate)
 			}
 			return state;
 		default:

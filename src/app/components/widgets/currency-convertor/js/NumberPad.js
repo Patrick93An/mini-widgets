@@ -14,14 +14,20 @@ export default class NumberPad extends React.Component {
 
 		this.hundred_units = [...Array(9).keys()]
 			.map(x => <li key={x}>{(x + 1) * 100}</li>);
+
+		this.thousand_units = [...Array(9).keys()]
+			.map(x => <li key={x}>{(x + 1) * 1000}</li>);
 	}
 
 	render() {
 		return(
-			<div className="numberpad">
-				<ul onClick={this.props.clickNumberPad}>{this.hundred_units}</ul>
-				<ul onClick={this.props.clickNumberPad}>{this.ten_units}</ul>
-				<ul onClick={this.props.clickNumberPad}>{this.single_units}</ul>
+			<div className="numberpad-wrapper">
+				<div className="numberpad">
+					<ul onClick={this.props.clickNumberPad}>{this.thousand_units}</ul>
+					<ul onClick={this.props.clickNumberPad}>{this.hundred_units}</ul>
+					<ul onClick={this.props.clickNumberPad}>{this.ten_units}</ul>
+					<ul onClick={this.props.clickNumberPad}>{this.single_units}</ul>
+				</div>
 			</div>
 		)
 	}

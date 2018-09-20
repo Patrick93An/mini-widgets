@@ -2,7 +2,7 @@ Arguments:
   C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js build
 
 PATH: 
-  C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\wamp64\bin\php\php7.1.16;C:\composer;C:\WINDOWS\System32\OpenSSH\;C:\Users\Patrick\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\Patrick\AppData\Local\Programs\Python\Python36-32\;C:\Program Files\Java\jdk-10\bin;C:\Users\Patrick\AppData\Roaming\Composer\vendor\bin;C:\Users\Patrick\AppData\Local\Microsoft\WindowsApps;
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin\;C:\wamp64\bin\php\php7.1.16;C:\composer;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\MongoDB\Server\4.0\bin;C:\Program Files\PuTTY\;C:\Users\Patrick\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\Patrick\AppData\Local\Programs\Python\Python36-32\;C:\Program Files\Java\jdk-10\bin;C:\Users\Patrick\AppData\Roaming\Composer\vendor\bin;C:\Users\Patrick\AppData\Local\Microsoft\WindowsApps;C:\Users\Patrick\AppData\Roaming\npm;C:\Users\Patrick\AppData\Local\Android\Sdk\tools;C:\Users\Patrick\AppData\Local\Android\Sdk\tools\bin;
 
 Yarn version: 
   1.5.1

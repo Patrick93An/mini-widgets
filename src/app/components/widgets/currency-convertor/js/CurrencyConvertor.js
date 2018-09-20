@@ -11,21 +11,23 @@ class CurrencyConvertor extends React.Component {
 
 	render() {
 		return(
-			<div>
-				<InputFieldsWrapper
-					from_currency={this.props.state.from_currency} 
-					to_currency={this.props.state.to_currency} 
-					from_value={this.props.state.from_value} 
-					to_value={this.props.state.to_value} 
-					currency_rate={this.props.state.currency_rate} 
-					swapCurrency={this.props.swapCurrency} 
-					changeFromCurrency={this.props.changeFromCurrency} 
-					changeToCurrency={this.props.changeToCurrency} 
-					changeCurrencyRate={this.props.changeCurrencyRate} 
-				/>
-				<NumberPad
-					clickNumberPad={this.props.clickNumberPad}
-				/>
+			<div className="currency-convertor-wrapper">
+				<div className="currency-convertor">
+					<InputFieldsWrapper
+						from_currency={this.props.state.from_currency} 
+						to_currency={this.props.state.to_currency} 
+						from_value={this.props.state.from_value} 
+						to_value={this.props.state.to_value} 
+						currency_rate={this.props.state.currency_rate} 
+						swapCurrency={this.props.swapCurrency} 
+						changeFromCurrency={this.props.changeFromCurrency} 
+						changeToCurrency={this.props.changeToCurrency} 
+						changeCurrencyRate={this.props.changeCurrencyRate} 
+					/>
+					<NumberPad
+						clickNumberPad={this.props.clickNumberPad}
+					/>
+				</div>
 			</div>
 		);
 	}

@@ -30,6 +30,10 @@ export default class InputFieldsWrapper extends React.Component {
 						value={this.props.currency_rate} />
 					<span>{this.props.to_value}</span>
 				</div>
+				<div className="inputs-row-3">
+					<button onClick={this.props.clearValueList}>Clear List</button>
+					<button onClick={this.props.saveValue}>Put to List</button>
+				</div>
 			</div>
 		)
 	}

@@ -2,6 +2,7 @@ import React from "react";
 import action_types from "./action-types";
 import InputFieldsWrapper from "./InputFieldsWrapper"
 import NumberPad from "./NumberPad"
+import SaveList from "./SaveList"
 import { connect } from "react-redux"
 
 class CurrencyConvertor extends React.Component {
@@ -23,6 +24,14 @@ class CurrencyConvertor extends React.Component {
 						changeFromCurrency={this.props.changeFromCurrency} 
 						changeToCurrency={this.props.changeToCurrency} 
 						changeCurrencyRate={this.props.changeCurrencyRate} 
+						clearValueList={this.props.clearValueList} 
+						saveValue={this.props.saveValue} 
+					/>
+					<SaveList
+						save_list={this.props.state.save_list}
+						from_currency={this.props.state.from_currency}
+						to_currency={this.props.state.to_currency}
+						deleteRow={this.props.deleteRow}
 					/>
 					<NumberPad
 						clickNumberPad={this.props.clickNumberPad}
@@ -44,7 +53,7 @@ const mapDispatchToProps = (dispatch) => {
 		changeFromCurrency: e => {
 			dispatch({
 				type: action_types.CHANGE_FROM_CURRENCY,
-				from_currency: parseFloat(e.currentTarget.value)
+				from_currency: e.currentTarget.value
 			})
 		},
 
@@ -57,7 +66,7 @@ const mapDispatchToProps = (dispatch) => {
 		changeToCurrency: e => {
 			dispatch({
 				type: action_types.CHANGE_TO_CURRENCY,
-				to_currency: parseFloat(e.currentTarget.value)
+				to_currency: e.currentTarget.value
 			})
 		},
 
@@ -73,7 +82,26 @@ const mapDispatchToProps = (dispatch) => {
 				type: action_types.CLICK_NUMBER_PAD,
 				event: e.target
 			})
-		}
+		},
+
+		clearValueList: e => {
+			dispatch({
+				type: action_types.CLEAR_VALUE_LIST,
+			})
+		},
+
+		saveValue: e => {
+			dispatch({
+				type: action_types.SAVE_VALUE,
+			})
+		},
+
+		deleteRow: e => {
+			dispatch({
+				type: action_types.DELETE_ROW,
+				delete_index: parseInt(e.currentTarget.getAttribute('data-index'))
+			})
+		},
 	}
 }
 

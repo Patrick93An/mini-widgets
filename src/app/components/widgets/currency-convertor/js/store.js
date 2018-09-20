@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import action_types from "./action-types";
+import { setCookie, getCookie } from "../../../helper";
 
 // const changeGridEpic = action$ =>
 // 	action$.ofType(action_types.CHANGE_GRID_INPUT_NUMBER)
@@ -23,12 +24,19 @@ if (process.env.NODE_ENV === 'development') {
 	}
 }
 
+let save_list = [];
+
+if (getCookie("currency_convertor_save_list")) {
+	save_list = JSON.parse(getCookie("currency_convertor_save_list"))
+}
+
 const initState = {
 	from_currency: "NT$",
 	to_currency: "MYR",
 	from_value: 0,
 	to_value: 0,
 	currency_rate: 0.13,
+	save_list,
 };
 
 var clearActiveClasses = elems => {
@@ -63,6 +71,7 @@ var getToValue = (from_value, currency_rate) => {
 
 const CCReducer = (state, action) => {
 	let from_value = 0;
+	let save_list = state.save_list;
 	switch (action.type) {
 		case action_types.CHANGE_FROM_CURRENCY:
 			state = {
@@ -94,6 +103,32 @@ const CCReducer = (state, action) => {
 				...state,
 				from_value: from_value,
 				to_value: getToValue(from_value, state.currency_rate)
+			}
+			return state;
+		case action_types.CLEAR_VALUE_LIST:
+			setCookie("currency_convertor_save_list", JSON.stringify(save_list));
+			state = {
+				...state,
+				save_list: []
+			}
+			return state;
+		case action_types.SAVE_VALUE:
+			save_list.push({
+				from_value: state.from_value,
+				to_value: state.to_value,
+			});
+			setCookie("currency_convertor_save_list", JSON.stringify(save_list));
+			state = {
+				...state,
+				save_list
+			}
+			return state;
+		case action_types.DELETE_ROW:
+			save_list.splice(action.delete_index, 1)
+			setCookie("currency_convertor_save_list", JSON.stringify(save_list));
+			state = {
+				...state,
+				save_list
 			}
 			return state;
 		default:
